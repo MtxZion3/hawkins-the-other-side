@@ -1,58 +1,18 @@
 {
-  "capture_target": "physical Swan",
+  "capture_target": "PICO emulator",
   "capture_date": "2026-10-26",
+  "capture_app_version": "1.0.2",
+  "capture_app_version_code": 3,
+  "capture_source_commit": "79001fb74670bb1269b3ba7d581f451356c3af53",
+  "status": "bilingual live flows verified; see RELEASE.md for upload state",
+  "capture_methods": [
+    "continuous Android screenrecord via pico-cli",
+    "runtime screenshots via pico-cli",
+    "public accessibility node actions with state readback",
+    "camera pose control verified against actual images"
+  ],
+  "transformations": "Crop the same full-frame runtime view to 16:9, resize to 2560x1440, convert source sRGB/BT.709 pixels to Display P3/P3 D65. Videos remain continuous at real-time speed with 30 fps output; no generated gameplay or audio.",
   "assets": [
-    {
-      "path": "assets/demo-cover.png",
-      "bytes": 2165049,
-      "sha256": "6572ae98370f1814d370c7e0144e1b301a336987c6ddd8d7b3cee6e915a07826",
-      "width": 2560,
-      "height": 1440,
-      "profile": "Display P3"
-    },
-    {
-      "path": "assets/demo.mp4",
-      "bytes": 21616409,
-      "sha256": "545e406a0d01860ae1d25e19f6dc4a9c831f079d328a4ccbe54b546b154e53e6",
-      "width": 2560,
-      "height": 1440,
-      "duration_seconds": 72,
-      "frames_per_second": 30,
-      "primaries": "smpte432",
-      "transfer": "iec61966-2-1"
-    },
-    {
-      "path": "assets/detail-1.png",
-      "bytes": 3680202,
-      "sha256": "484a6ac675e695f9855435c8f3d5a4e9793fe3e471060d15e62c99a0c37bf1ff",
-      "width": 2560,
-      "height": 1440,
-      "profile": "Display P3"
-    },
-    {
-      "path": "assets/detail-2.png",
-      "bytes": 3696017,
-      "sha256": "e12e8b535cb2ac69469010bab278aecf451987bd7b1067904116f61963eb1fae",
-      "width": 2560,
-      "height": 1440,
-      "profile": "Display P3"
-    },
-    {
-      "path": "assets/detail-3.png",
-      "bytes": 1431420,
-      "sha256": "0044f23e6ae638ba971d757f417ba95447734ac81042dccd19d94082d74a037d",
-      "width": 2560,
-      "height": 1440,
-      "profile": "Display P3"
-    },
-    {
-      "path": "assets/detail-4.png",
-      "bytes": 3673803,
-      "sha256": "a6f9cdcfa39e26a900623eb8eeb70a48bab0f9a2355352b3cda21d8e9d888edf",
-      "width": 2560,
-      "height": 1440,
-      "profile": "Display P3"
-    },
     {
       "path": "assets/icon.png",
       "bytes": 1592359,
@@ -63,13 +23,89 @@
     },
     {
       "path": "assets/landscape.png",
-      "bytes": 1991699,
-      "sha256": "454370960c61746a9ab29e677fc50b34cef4264fa101f826ec2654bb9ac1adb4",
+      "bytes": 3533358,
+      "sha256": "5057d9f51488b59acb963ac1345cf371f497f7035b8c83d15f26799cc25a4675",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/detail-1.png",
+      "bytes": 3425595,
+      "sha256": "bf28e5da9bfa4681609b72cd0675303c876ba56c8b1d21b5ed2e44db7e623488",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/detail-2.png",
+      "bytes": 3506869,
+      "sha256": "de165f10526320612fcd85a8fc617e1a1074f15381d1d0818bff8cd2a8bab72f",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/detail-3.png",
+      "bytes": 2762113,
+      "sha256": "55ff96dbe4253631fd6b55988425aae9b77f75a386fcf89890ae3cd86901e2bd",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/detail-4.png",
+      "bytes": 3526703,
+      "sha256": "e24138ad22b04ca8d8ef9418eef2d3d7495de7de1ff46d92902f2e57c2211669",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/detail-5.png",
+      "bytes": 3421911,
+      "sha256": "76226ec7ee0ede8c1ff98fc655740d08864ef3c049bd35f00de6dea98cc7a63a",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/demo.mp4",
+      "bytes": 3082066,
+      "sha256": "9fd7ec3d461359cbb2c23fef748994b5237823d919d876b53eac3f1252a1e740",
+      "width": 2560,
+      "height": 1440,
+      "duration_seconds": 46.23,
+      "frames_per_second": 30,
+      "primaries": "smpte432",
+      "transfer": "iec61966-2-1"
+    },
+    {
+      "path": "assets/demo-cover.png",
+      "bytes": 2419965,
+      "sha256": "6674c06a28a262e2c71e6b466cddc285d7c8ca2cdf5ffc5c54df355de364a483",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/demo-en.mp4",
+      "bytes": 4155643,
+      "sha256": "c298bc5e674af27e03c176785649047c9d425091fa5aec6325bd3e0d29dc233d",
+      "width": 2560,
+      "height": 1440,
+      "duration_seconds": 64.17,
+      "frames_per_second": 30,
+      "primaries": "smpte432",
+      "transfer": "iec61966-2-1"
+    },
+    {
+      "path": "assets/demo-en-cover.png",
+      "bytes": 2356085,
+      "sha256": "dd99d43766bb906b1816986bb4a8dc78ad2ad557b85180268c174f86ad21a834",
       "width": 2560,
       "height": 1440,
       "profile": "Display P3"
     }
-  ],
-  "capture_app_version": "1.0.1",
-  "status": "historical media; refresh before uploading localized 1.0.2"
+  ]
 }

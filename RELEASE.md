@@ -1,53 +1,55 @@
 # VibeLab release preparation — 1.0.2
 
-## 1.0.2 localization status
+## Application and localization
 
-Implemented English and Simplified Chinese Android resources for the receiver layout, six puzzle phases, loading/error guidance, action labels and accessibility. Numeric formats use resource placeholders. The app follows Android system/per-app locale selection; unsupported languages fall back to English. Latin puzzle letters and internal binding IDs remain unchanged. English world-name geometry was replaced with a language-neutral year plaque; world names now belong to the localized UI. The scene still imports with 9 semantic bindings and 81 entities.
+Version `1.0.2`, code `3`, package `com.example.hawkins`, Spatial SDK `6.1.9`.
+The receiver layout, six puzzle phases, loading/error guidance, action labels and accessibility descriptions use English and Simplified Chinese Android string resources. Numeric formats use resource placeholders. The app follows system/per-app language settings; unsupported languages fall back to English. Puzzle letters and internal binding IDs remain unchanged. The scene retains 9 semantic bindings and 81 entities; its plaque uses the language-neutral year 1983.
 
-- Version `1.0.2`, code `3`; `assembleDebug` and 13 native unit tests passed.
-- Seven localization contract checks and seven asset-export tests passed.
-- Four Android instrumentation tests passed on the physical Swan, including three new tests for English/Chinese resource resolution, numeric formatting, accessibility and fallback language.
-- `lintDebug` passed with no errors; template/dependency/icon warnings remain. This is not a claim of a warning-free lint report.
-- The 1.0.2 APK has been installed. Full localized foreground interaction, visual layout acceptance and replacement media are **pending**: the headset was asleep during the attempted foreground checks. Per-app language override was restored to its original system-following setting.
-- Current media below were recorded with **1.0.1**, before localization. They are retained as historical gameplay evidence and must be replaced before committing a 1.0.2 cloud draft. No 1.0.2 upload or review submission is claimed.
-- The existing 1.0.1 cloud draft remains pinned to its earlier source commit. Current release-cli CN only exposes a Chinese listing slot; 1.0.2 metadata includes both Chinese and English prose without claiming an additional English listing record.
+The dedicated radio-and-signal icon is shared by the Android launcher and VibeLab listing. Template 3D icon metadata was removed. No new app code was needed for this media refresh; captures use application source commit `79001fb74670bb1269b3ba7d581f451356c3af53`.
 
-## Previous 1.0.1 changes
+## Verified behavior
 
-- Dedicated radio-and-signal icon shared by Android launcher and VibeLab listing.
-- Template 3D launcher layers removed to avoid unrelated default artwork.
-- Public Maven build configuration, public source, English play/build instructions and Chinese listing copy.
-- Existing native scene, semantic bindings and puzzle logic preserved.
+- Build and 13 native unit tests passed in the localization pass.
+- Seven localization checks and seven asset-export tests passed.
+- Four Android instrumentation tests passed on the physical Swan, including English/Chinese resource resolution, formatting, accessibility and fallback language.
+- `lintDebug` passed with zero errors; template/dependency/icon warnings remain.
+- On the emulator, Chinese Reset → world switch → tune to 83 MHz → Listen → letter reply → Transmit reached `连接已建立`.
+- The English run also submitted an incorrect reply, verified `03 / NO RESPONSE`, erased it, and submitted a correct reply. Readback confirmed `CONTACT ESTABLISHED`.
+- Changing app language after solving preserved the solved state in this run. Process-death persistence is not claimed.
+- Both runs were continuous real-time recordings. Camera positioning was checked against actual images. Public accessibility actions drove the controls; this does not certify physical hand/controller input or independent visual puzzle solving.
 
-## Previous 1.0.1 validation on 2026-10-26
+The 1.0.2 physical APK was installed, but the sleeping headset prevented a new foreground visual acceptance run. Earlier 1.0.1 physical-device validation is historical evidence, not proof that every localized screen was checked on hardware. Long-duration performance and other headset models remain unverified.
 
-- `assembleDebug`: passed; `testDebugUnitTest`: 13 passed, 0 failures.
-- Physical Swan, Spatial runtime 6.3, Android 16, arm64.
-- Application ID `com.example.hawkins`; version `1.0.1`, code `2`.
-- Installation and launch succeeded. Custom radio icon observed in the device Dock.
-- Live public accessibility actions verified Reset, Upside Down, frequency tuning to 83 MHz, Listen, R/U/N entry, and Transmit.
-- Read-back confirmed `CONTACT ESTABLISHED` and `You found a way through. The room is safe for now.`
-- This is one physical-device acceptance run, not broad headset coverage or a long-duration performance certification. Controller/hand input was not exhaustively tested.
+## Publishing media
 
-## Previous 1.0.1 publishing material
+Preparation mode: agent-prepared. All product images below come from the running 1.0.2 emulator application, not a design preview. The icon is original purpose-built artwork. `assets-manifest.json` records exact hashes, dimensions, color profiles and durations.
 
-Preparation mode: agent-prepared. Target: a VibeLab cloud draft backed by a public GitHub commit. These captures are from 1.0.1 on the physical headset, not an emulator or HTML preview. They are not 1.0.2 localization evidence.
+| Asset | Content |
+| --- | --- |
+| `assets/icon.png` | Radio-and-signal launcher artwork, 1024×1024 Display P3 |
+| `assets/landscape.png` | English completed scene from a separate oblique camera view |
+| `assets/detail-1.png` | Chinese normal-world receiver and room |
+| `assets/detail-2.png` | Chinese Upside Down environment |
+| `assets/detail-3.png` | Active letter-wall signal and receiving state |
+| `assets/detail-4.png` | English incorrect reply with recovery instructions |
+| `assets/detail-5.png` | Chinese successful contact and restored room |
+| `assets/demo.mp4` | About 46 seconds of continuous Chinese gameplay |
+| `assets/demo-en.mp4` | About 64 seconds of continuous English gameplay including error recovery |
+| `assets/demo-cover.png`, `assets/demo-en-cover.png` | Frames extracted from the corresponding recordings |
 
-| Asset | Content | Output |
-| --- | --- | --- |
-| `assets/icon.png` | Original radio-and-signal launcher artwork | 1024×1024, Display P3 |
-| `assets/landscape.png` | Runtime alphabet wall and locked receiver close-up | 2560×1440, Display P3 |
-| `assets/detail-1.png` | Normal-world room and receiver overview | 2560×1440, Display P3 |
-| `assets/detail-2.png` | Upside Down and partial letter reply | 2560×1440, Display P3 |
-| `assets/detail-3.png` | Receiving state and receiver controls | 2560×1440, Display P3 |
-| `assets/detail-4.png` | Successful transmission and safe room | 2560×1440, Display P3 |
-| `assets/demo.mp4` | Continuous physical-headset gameplay, world switch through successful reply | 72 seconds, 2560×1440, 30 fps, P3 D65 |
-| `assets/demo-cover.png` | Runtime recording frame with completed reply ready to transmit | 2560×1440, Display P3 |
+All landscape/detail/cover images and both videos are 2560×1440 at 16:9. Images use Display P3; videos use P3 D65 primaries with sRGB transfer, encoded at 30 fps. Source recording averaged about 28.5 fps on this emulator. FFmpeg performs an actual BT.709-to-P3 conversion; screenshot pixels are converted from sRGB using ColorSync. Cropping/resizing preserves the application content. Videos are not slideshows, are not sped up, and contain no invented game audio. The application has no audio-based gameplay.
 
-Still captures came from `pico-cli capture screenshot --spatial`; video came from the physical device's native `screenrecord`, invoked through `pico-cli shell`. Native recording was bounded to 85 seconds and retrieved using `pico-cli files pull`. It was trimmed, rotated, cropped to one eye, framed to preserve the whole receiver, and converted to P3. The original device video reports BT.470BG primaries/matrix with SMPTE 170M transfer; FFmpeg performed an actual color-space transform to P3 D65/sRGB transfer. Frames extracted from that converted video carry a matching Display P3 ICC profile. Still screenshots were converted from their embedded sRGB profile with ColorSync.
+There are nine images including the icon and two videos. Each image is below 5 MB; each video is below 100 MB. Raw captures, local device identifiers, credentials and upload state are not published.
 
-The video retains the headset compositor's optical distortion and uses side borders to avoid cutting off controls. It is a real continuous capture, not a slideshow or a generated gameplay reconstruction. This visual-only prototype has no recorded game audio. Screenshot crops and resizing improve focus but do not add scene content. A small background headset overlay remains visible in some frames; no account details or desktop/chat content is included.
+## Follow-up improvements
 
-All seven image files are below 5 MB (the icon below 4 MB), the video is below 100 MB, and images have distinct hashes. `assets-manifest.json` records exact deliverable hashes and dimensions. Raw captures, device identifiers, credentials and local upload state are not published.
+- The default distant view makes text and letter clues small. Close camera framing helps, but a user-facing inspection mode or adjustable panel placement would improve regular use.
+- Signals run at 650 ms per letter. Replay is available; a slower mode would improve readability.
+- Controls have localized accessibility descriptions, but the 3D visual clue sequence has no equivalent nonvisual mode. Do not describe the entire puzzle as screen-reader accessible.
+- Progress persistence across process death remains a design improvement to evaluate, not a reproduced locale-switch bug.
 
-Original code-generation model was not recorded by the source project. This release preparation used Codex / GPT-6 for build configuration, documentation and publishing, and Image Generation for the custom icon. Public source availability and a saved draft do not imply that VibeLab review or store release has been approved.
+## Publication boundary
+
+The destination is the existing VibeLab draft backed by the public GitHub repository. Saving a draft is not formal review submission or store approval. The CN provider exposes a Chinese listing slot; the description includes both languages without claiming a second English listing record. Upload state must be verified on the creator page when the provider's read-only state endpoint returns a server error.
+
+Original code-generation model was not recorded by the source project. Release preparation used Codex / GPT-6, with Image Generation for the custom icon. This is an independent, unofficial fan-inspired technical prototype with procedurally authored scene geometry.
