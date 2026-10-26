@@ -11,6 +11,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
+import android.content.res.Resources
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.semantics
@@ -22,7 +24,6 @@ import com.pico.spatial.ui.design.*
 import com.pico.spatial.ui.design.windows.Toolbar
 import org.json.JSONObject
 import com.example.hawkins.domain.usecase.ReceiverPuzzleUseCase
-import java.util.Locale
 
 // The bounded receiver renderer consumes the actual design graph; no second copy of its layout or copy.
 private class ReceiverDesign(val json: JSONObject) {
@@ -53,14 +54,12 @@ private class ReceiverDesign(val json: JSONObject) {
         }
         return result to hidden
     }
-    fun value(key: String, s: RoomState): String {
+    fun value(key: String, s: RoomState, resources: Resources): String {
+        fun text(ref: String, vararg args: Any) = ReceiverStrings.text(resources, ref, *args)
         val cases = json.getJSONObject("dataCases")
-        val initial = cases.getJSONObject("normal")
         val loading = node("control-panel").getJSONObject("props").getJSONObject("loading")
-        val sequence = actions.getValue("play-run").getJSONObject("payload")
         val worldKeys = actions.getValue("switch-world").getJSONObject("payload").getJSONArray("nativeStates")
         val index = (0 until worldKeys.length()).firstOrNull { worldKeys.getString(it) == s.world } ?: 0
-        val target = actions.getValue("switch-world").getJSONObject("payload").getJSONArray("targetStates").getString(index)
         val puzzle = node("control-panel").getJSONObject("props").getJSONObject("puzzle")
         val labels = puzzle.getJSONObject("labels")
         val rules = ReceiverPuzzleUseCase()
@@ -79,17 +78,17 @@ private class ReceiverDesign(val json: JSONObject) {
             "eraseDisabled" -> (unavailable || s.reply.isEmpty() || s.busy || s.solved).toString()
             "submitDisabled" -> (unavailable || !s.received || s.reply.length != puzzle.getInt("replyLength") || s.busy || s.solved).toString()
             "frequency" -> s.frequency.toString()
-            "frequencyLabel" -> String.format(Locale.US, "%.1f", s.frequency) + labels.getString("frequencySuffix")
-            "strengthLabel" -> rules.strength(s).toString() + labels.getString("strengthSuffix")
+            "frequencyLabel" -> text(labels.getString("frequencyFormat"), s.frequency)
+            "strengthLabel" -> text(labels.getString("strengthFormat"), rules.strength(s))
             "busy" -> (unavailable || s.busy).toString()
             "rotating" -> s.rotating.toString()
-            "playLabel" -> labels.getString(when { s.solved -> "solved"; s.busy -> "listening"; s.received -> "replay"; else -> "listen" })
-            "status" -> when { s.error != null -> cases.getJSONObject("error").getString("status"); !s.ready -> loading.getString("status"); else -> copy.getString(1) }
-            "signalCaption" -> when { s.error != null -> cases.getJSONObject("error").getString("signalCaption"); !s.ready -> loading.getString("signalCaption"); else -> copy.getString(0) }
+            "playLabel" -> text(labels.getString(when { s.solved -> "solved"; s.busy -> "listening"; s.received -> "replay"; else -> "listen" }))
+            "status" -> text(when { s.error != null -> cases.getJSONObject("error").getString("status"); !s.ready -> loading.getString("status"); else -> copy.getString(1) })
+            "signalCaption" -> text(when { s.error != null -> cases.getJSONObject("error").getString("signalCaption"); !s.ready -> loading.getString("signalCaption"); else -> copy.getString(0) })
             "signalReadout" -> when {
                 s.received || s.solved -> (0 until puzzle.getInt("replyLength")).joinToString(" ") { s.reply.getOrNull(it)?.toString() ?: "_" }
                 s.busy -> letters.indices.joinToString(" ") { if (it <= s.signalIndex) "●" else "·" }
-                else -> String.format(Locale.US, "%.1f", s.frequency)
+                else -> text("@string/frequency_readout", s.frequency)
             }
             else -> error("Unknown receiver binding: $key")
         }
@@ -105,6 +104,10 @@ fun RoomToolbar(state: RoomState, onEvent: (RoomEvent) -> Unit, availableWidth: 
 
 @Composable
 private fun ReceiverNode(id: String, d: ReceiverDesign, s: RoomState, send: (RoomEvent) -> Unit, width: Float, modifier: Modifier = Modifier) {
+    val configuration = LocalConfiguration.current
+    val context = LocalContext.current
+    val resources = remember(context, configuration) { context.createConfigurationContext(configuration).resources }
+    fun text(ref: String) = ReceiverStrings.text(resources, ref)
     val n = d.node(id); val (l, hidden) = d.layout(id, width)
     if (hidden) return
     val children = n.optJSONArray("children")?.let { a -> (0 until a.length()).map { a.getString(it) } } ?: emptyList()
@@ -117,8 +120,8 @@ private fun ReceiverNode(id: String, d: ReceiverDesign, s: RoomState, send: (Roo
         if (a.has("fill")) m = m.clip(RoundedCornerShape(a.optDouble("radiusDp", 0.0).toFloat().dp)).background(d.color(a.getString("fill")))
     }
     dimension("paddingDp")?.let { m = m.padding(it) }
-    if (n.has("accessibilityLabel")) m = m.semantics { contentDescription = n.getString("accessibilityLabel") }
-    fun prop(key: String, default: String = ""): String = n.optJSONObject("bindings")?.optString(key)?.takeIf { it.isNotEmpty() }?.let { d.value(it, s) } ?: n.optJSONObject("props")?.optString(key, default) ?: default
+    if (n.has("accessibilityLabel")) m = m.semantics { contentDescription = text(n.getString("accessibilityLabel")) }
+    fun prop(key: String, default: String = ""): String = n.optJSONObject("bindings")?.optString(key)?.takeIf { it.isNotEmpty() }?.let { d.value(it, s, resources) } ?: n.optJSONObject("props")?.optString(key, default) ?: default
     fun action(event: String, index: Int = 0, checked: Boolean = false) {
         val name = n.optJSONObject("events")?.optString(event) ?: return
         when (name) {
@@ -145,18 +148,21 @@ private fun ReceiverNode(id: String, d: ReceiverDesign, s: RoomState, send: (Roo
         "text" -> {
             val style = n.getJSONObject("textStyle")
             val type = when (style.getString("typography")) { "display" -> PicoTheme.typography.displaySmall; "readout" -> PicoTheme.typography.headlineLarge; "label" -> PicoTheme.typography.labelSmall; "subtitle" -> PicoTheme.typography.titleSmall; else -> PicoTheme.typography.bodyMedium }
-            Text(n.optJSONObject("bindings")?.optString("content")?.takeIf { it.isNotEmpty() }?.let { d.value(it, s) } ?: n.optString("content"), modifier = m, color = d.color(style.getString("color")), style = type)
+            Text(n.optJSONObject("bindings")?.optString("content")?.takeIf { it.isNotEmpty() }?.let { d.value(it, s, resources) } ?: text(n.getString("content")), modifier = m, color = d.color(style.getString("color")), style = type)
         }
         "spatialui" -> when (n.getString("component")) {
             "sui-toolbar" -> Toolbar(cornerSize = prop("corner-radius").toFloat().dp) { children.forEach { ReceiverNode(it, d, s, send, width) } }
             "sui-button" -> Button(onClick = { action("click-action") }, modifier = m.heightIn(min = 56.dp), enabled = prop("disabled") != "true", size = if (prop("size") == "max") ButtonDefaults.Max else ButtonDefaults.Regular, colors = ButtonDefaults.buttonColors(containerColor = d.color(prop("container-color")), contentColor = d.color(prop("content-color")))) {
                 // design-style: inherited-content-color Button
-                Text(prop("text"))
+                Text(prop("text").let { if (it.startsWith("@string/")) text(it) else it })
             }
             "sui-segment-control" -> {
                 val enabled = prop("disabled") != "true"
                 SegmentControl(modifier = m.heightIn(min = 56.dp).alpha(if (enabled) 1f else .45f).semantics { if (!enabled) disabled() }) {
-                    prop("options").split(',').forEachIndexed { i, title -> SegmentItem(selected = prop("selected-index").toInt() == i, onClick = { if (enabled) action("select", index = i) }, title = {
+                    val options = n.getJSONObject("props").getJSONArray("options")
+                    (0 until options.length()).forEach { i ->
+                        val title = text(options.getString(i))
+                        SegmentItem(selected = prop("selected-index").toInt() == i, onClick = { if (enabled) action("select", index = i) }, title = {
                         // design-style: inherited-content-color SegmentItem
                         Text(title)
                     }) }

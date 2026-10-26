@@ -77,7 +77,8 @@ export function createScene(fontData) {
       }
       tube(cable,.002,dark);
     }
-    text(alternate?'THE UPSIDE DOWN':'HAWKINS  /  1983',.025,cream,0,-.232,.342);
+    // World names belong to the localized native UI, not baked English geometry.
+    text(String(1983),.025,cream,0,-.232,.342);
     if(alternate){
       const vine=mat(0x49232d),vein=mat(0x974044,0x420d13);
       for(let i=0;i<10;i++){

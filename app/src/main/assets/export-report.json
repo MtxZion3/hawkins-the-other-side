@@ -9,10 +9,10 @@
     "onlyVisible": false,
     "trs": true
   },
-  "assetSha256": "a8e6f294bbe7e599f3192586532ecde3a797b29ec6f4581c2fbc692b89312a98",
-  "bindingsSha256": "22633bbecdb088cca32805d4444bc8b04d4fecf3862c3eae8741887894fcce78",
+  "assetSha256": "f8f5950cb524df56e3b0c4429689c724c8a274d1fd2bfc71c97fd48628179534",
+  "bindingsSha256": "f80662c9a81816c99ed20e84553ff98eb56d6f8adfcd7fc54a438b17d0bcc7ee",
   "sourceHashes": {
-    "scene.mjs": "4a176a1df3478c6ad1ee456dc9b4d8fefbcc995dec940cbe9370b936163b733f",
+    "scene.mjs": "7d0439d5bc7ceea1c8ea328792dcfcf1c1803e753bb872f135e5c000e536b116",
     "portability.mjs": "c42ab6c4c12d3c6a83f62abf5ac8716e2374238240b3caed6276a6686ba89d56",
     "export.mjs": "36940f2e1dbdbc2f9bdf2f47c6baebb4fdcc7764700b6dcae65e8ccf77bf1369",
     "package-lock.json": "00c5f05e2c97ab2f1ca2a67a2e0e0ef67fa5f3cbb26f71c1bca387bbae749586",
@@ -21,7 +21,7 @@
   "errors": [],
   "nodes": 82,
   "meshes": 78,
-  "triangles": 24496,
+  "triangles": 23840,
   "bounds": {
     "min": [
       -0.6150000095367432,

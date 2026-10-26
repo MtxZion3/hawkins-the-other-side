@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "threejs-spatial-export/v1",
+  "status": "passed",
+  "targetCompatibility": "unverified",
+  "threeVersion": "0.180.0",
+  "exporter": "three/addons/exporters/GLTFExporter.js",
+  "settings": {
+    "binary": true,
+    "onlyVisible": false,
+    "trs": true
+  },
+  "assetSha256": "f8f5950cb524df56e3b0c4429689c724c8a274d1fd2bfc71c97fd48628179534",
+  "bindingsSha256": "f80662c9a81816c99ed20e84553ff98eb56d6f8adfcd7fc54a438b17d0bcc7ee",
+  "sourceHashes": {
+    "scene.mjs": "7d0439d5bc7ceea1c8ea328792dcfcf1c1803e753bb872f135e5c000e536b116",
+    "portability.mjs": "c42ab6c4c12d3c6a83f62abf5ac8716e2374238240b3caed6276a6686ba89d56",
+    "export.mjs": "36940f2e1dbdbc2f9bdf2f47c6baebb4fdcc7764700b6dcae65e8ccf77bf1369",
+    "package-lock.json": "00c5f05e2c97ab2f1ca2a67a2e0e0ef67fa5f3cbb26f71c1bca387bbae749586",
+    "font": "d5c5467690f74061179a292af83bd85c4c551e0f106b2af99714f11184c96981"
+  },
+  "errors": [],
+  "nodes": 82,
+  "meshes": 78,
+  "triangles": 23840,
+  "bounds": {
+    "min": [
+      -0.6150000095367432,
+      -0.24250000715255737,
+      -0.3449999988079071
+    ],
+    "max": [
+      0.6150000095367432,
+      0.31949999928474426,
+      0.3434999883174896
+    ]
+  }
+}

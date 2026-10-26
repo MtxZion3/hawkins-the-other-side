@@ -1,13 +1,25 @@
-# VibeLab release preparation — 1.0.1
+# VibeLab release preparation — 1.0.2
 
-## Included changes
+## 1.0.2 localization status
+
+Implemented English and Simplified Chinese Android resources for the receiver layout, six puzzle phases, loading/error guidance, action labels and accessibility. Numeric formats use resource placeholders. The app follows Android system/per-app locale selection; unsupported languages fall back to English. Latin puzzle letters and internal binding IDs remain unchanged. English world-name geometry was replaced with a language-neutral year plaque; world names now belong to the localized UI. The scene still imports with 9 semantic bindings and 81 entities.
+
+- Version `1.0.2`, code `3`; `assembleDebug` and 13 native unit tests passed.
+- Seven localization contract checks and seven asset-export tests passed.
+- Four Android instrumentation tests passed on the physical Swan, including three new tests for English/Chinese resource resolution, numeric formatting, accessibility and fallback language.
+- `lintDebug` passed with no errors; template/dependency/icon warnings remain. This is not a claim of a warning-free lint report.
+- The 1.0.2 APK has been installed. Full localized foreground interaction, visual layout acceptance and replacement media are **pending**: the headset was asleep during the attempted foreground checks. Per-app language override was restored to its original system-following setting.
+- Current media below were recorded with **1.0.1**, before localization. They are retained as historical gameplay evidence and must be replaced before committing a 1.0.2 cloud draft. No 1.0.2 upload or review submission is claimed.
+- The existing 1.0.1 cloud draft remains pinned to its earlier source commit. Current release-cli CN only exposes a Chinese listing slot; 1.0.2 metadata includes both Chinese and English prose without claiming an additional English listing record.
+
+## Previous 1.0.1 changes
 
 - Dedicated radio-and-signal icon shared by Android launcher and VibeLab listing.
 - Template 3D launcher layers removed to avoid unrelated default artwork.
 - Public Maven build configuration, public source, English play/build instructions and Chinese listing copy.
 - Existing native scene, semantic bindings and puzzle logic preserved.
 
-## Validation on 2026-10-26
+## Previous 1.0.1 validation on 2026-10-26
 
 - `assembleDebug`: passed; `testDebugUnitTest`: 13 passed, 0 failures.
 - Physical Swan, Spatial runtime 6.3, Android 16, arm64.
@@ -17,9 +29,9 @@
 - Read-back confirmed `CONTACT ESTABLISHED` and `You found a way through. The room is safe for now.`
 - This is one physical-device acceptance run, not broad headset coverage or a long-duration performance certification. Controller/hand input was not exhaustively tested.
 
-## Publishing material
+## Previous 1.0.1 publishing material
 
-Preparation mode: agent-prepared. Target: a VibeLab cloud draft backed by a public GitHub commit. No emulator images, HTML previews or old-version screenshots are used.
+Preparation mode: agent-prepared. Target: a VibeLab cloud draft backed by a public GitHub commit. These captures are from 1.0.1 on the physical headset, not an emulator or HTML preview. They are not 1.0.2 localization evidence.
 
 | Asset | Content | Output |
 | --- | --- | --- |

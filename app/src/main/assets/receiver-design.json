@@ -267,47 +267,9 @@
     }
   ],
   "dataCases": {
-    "normal": {
-      "worldId": "hawkins",
-      "rotating": false,
-      "rotationLabel": "Inspect motion",
-      "playLabel": "Send RUN",
-      "busy": false,
-      "status": "A quiet room. A message waiting.",
-      "signalCaption": "ALPHABET LINK / STANDBY",
-      "signalIndex": -1,
-      "angle": 0,
-      "geometryAvailable": true,
-      "detailAvailable": true,
-      "signalReadout": "· · ·"
-    },
-    "fallback": {
-      "worldId": "hawkins",
-      "rotating": false,
-      "rotationLabel": "Inspect motion",
-      "playLabel": "Send RUN",
-      "busy": false,
-      "status": "A quieter scene. The lights still work.",
-      "signalCaption": "LOCAL LINK / READY",
-      "signalIndex": -1,
-      "angle": 0,
-      "geometryAvailable": true,
-      "detailAvailable": false,
-      "signalReadout": "· · ·"
-    },
     "error": {
-      "worldId": "hawkins",
-      "rotating": false,
-      "rotationLabel": "Inspect motion",
-      "playLabel": "Send RUN",
-      "busy": true,
-      "status": "The room could not appear. Reset to try again.",
-      "signalCaption": "LINK UNAVAILABLE",
-      "signalIndex": -1,
-      "angle": 0,
-      "geometryAvailable": false,
-      "detailAvailable": true,
-      "signalReadout": "· · ·"
+      "status": "@string/error_status",
+      "signalCaption": "@string/error_caption"
     }
   },
   "responsiveRules": [
@@ -451,8 +413,8 @@
           ]
         },
         "loading": {
-          "status": "The room is appearing…",
-          "signalCaption": "ESTABLISHING LINK",
+          "status": "@string/loading_status",
+          "signalCaption": "@string/loading_signalcaption",
           "signalReadout": "· · ·"
         },
         "puzzle": {
@@ -473,39 +435,39 @@
           "replyLength": 3,
           "phaseCopy": {
             "search": [
-              "01 / FIND THE SIGNAL",
-              "Slide the dial. Watch the lights grow steady."
+              "@string/phase_search_0",
+              "@string/phase_search_1"
             ],
             "locked": [
-              "01 / CHANNEL LOCKED",
-              "Listen, then remember the order on the wall."
+              "@string/phase_locked_0",
+              "@string/phase_locked_1"
             ],
             "listening": [
-              "02 / WATCH THE ALPHABET WALL",
-              "Remember the three letters. The receiver cannot decode them."
+              "@string/phase_listening_0",
+              "@string/phase_listening_1"
             ],
             "reply": [
-              "03 / REPLY TO THE OTHER SIDE",
-              "Enter the letters in the order you saw them."
+              "@string/phase_reply_0",
+              "@string/phase_reply_1"
             ],
             "wrong": [
-              "03 / NO RESPONSE",
-              "That reply did not connect. Clear it or listen again."
+              "@string/phase_wrong_0",
+              "@string/phase_wrong_1"
             ],
             "solved": [
-              "CONTACT ESTABLISHED",
-              "You found a way through. The room is safe for now."
+              "@string/phase_solved_0",
+              "@string/phase_solved_1"
             ]
           },
           "labels": {
-            "listen": "Listen",
-            "replay": "Hear again",
-            "listening": "Receiving…",
-            "solved": "Connected",
-            "send": "Transmit",
-            "clear": "Erase",
-            "frequencySuffix": " MHz",
-            "strengthSuffix": "% LINK"
+            "listen": "@string/action_listen",
+            "replay": "@string/action_replay",
+            "listening": "@string/action_listening",
+            "solved": "@string/action_solved",
+            "send": "@string/action_send",
+            "clear": "@string/action_clear",
+            "frequencyFormat": "@string/frequency_format",
+            "strengthFormat": "@string/strength_format"
           }
         }
       },
@@ -574,7 +536,7 @@
     {
       "id": "title",
       "kind": "text",
-      "content": "HAWKINS",
+      "content": "@string/title",
       "textStyle": {
         "typography": "display",
         "color": "receiver-red"
@@ -583,7 +545,7 @@
     {
       "id": "subtitle",
       "kind": "text",
-      "content": "FIELD RECEIVER",
+      "content": "@string/subtitle",
       "textStyle": {
         "typography": "label",
         "color": "labelSecondary"
@@ -592,7 +554,7 @@
     {
       "id": "station",
       "kind": "text",
-      "content": "BYERS RESIDENCE / NOV 1983",
+      "content": "@string/station",
       "textStyle": {
         "typography": "label",
         "color": "labelSecondary"
@@ -620,7 +582,6 @@
     {
       "id": "signal-readout",
       "kind": "text",
-      "content": "· · ·",
       "textStyle": {
         "typography": "readout",
         "color": "signal-amber"
@@ -649,7 +610,6 @@
     {
       "id": "signal-caption",
       "kind": "text",
-      "content": "",
       "textStyle": {
         "typography": "label",
         "color": "signal-amber"
@@ -661,7 +621,6 @@
     {
       "id": "status",
       "kind": "text",
-      "content": "",
       "textStyle": {
         "typography": "body",
         "color": "labelSecondary"
@@ -699,7 +658,7 @@
     {
       "id": "channel-label",
       "kind": "text",
-      "content": "CONTACT WORLD",
+      "content": "@string/channel_label",
       "textStyle": {
         "typography": "label",
         "color": "labelSecondary"
@@ -711,7 +670,10 @@
       "component": "sui-segment-control",
       "props": {
         "size": "regular",
-        "options": "Hawkins,Upside Down",
+        "options": [
+          "@string/world_normal",
+          "@string/world_alternate"
+        ],
         "selected-index": 0
       },
       "bindings": {
@@ -721,7 +683,7 @@
       "events": {
         "select": "switch-world"
       },
-      "accessibilityLabel": "Choose contact world"
+      "accessibilityLabel": "@string/a11y_world_toggle"
     },
     {
       "id": "transmit",
@@ -739,7 +701,7 @@
     {
       "id": "transmit-label",
       "kind": "text",
-      "content": "02 / RECEIVE",
+      "content": "@string/transmit_label",
       "textStyle": {
         "typography": "label",
         "color": "labelSecondary"
@@ -751,7 +713,6 @@
       "component": "sui-button",
       "props": {
         "size": "max",
-        "text": "Send RUN",
         "container-color": "#D6AF70",
         "content-color": "#211F19"
       },
@@ -762,7 +723,7 @@
       "events": {
         "click-action": "play-run"
       },
-      "accessibilityLabel": "Listen to the alphabet wall or replay its message"
+      "accessibilityLabel": "@string/a11y_play_signal"
     },
     {
       "id": "inspection",
@@ -794,7 +755,7 @@
     {
       "id": "motion-label",
       "kind": "text",
-      "content": "SLOW SWEEP",
+      "content": "@string/motion_label",
       "textStyle": {
         "typography": "label",
         "color": "labelSecondary"
@@ -812,14 +773,14 @@
       "events": {
         "checked-change": "toggle-rotation"
       },
-      "accessibilityLabel": "Slowly rotate the miniature"
+      "accessibilityLabel": "@string/a11y_rotation_toggle"
     },
     {
       "id": "reset-view",
       "kind": "spatialui",
       "component": "sui-button",
       "props": {
-        "text": "Reset",
+        "text": "@string/reset_view",
         "size": "regular",
         "container-color": "#45463B",
         "content-color": "#F1E5CD"
@@ -828,7 +789,7 @@
       "events": {
         "click-action": "reset-scene"
       },
-      "accessibilityLabel": "Reset room and receiver"
+      "accessibilityLabel": "@string/a11y_reset_view"
     },
     {
       "id": "primary-actions",
@@ -861,7 +822,6 @@
     {
       "id": "frequency-label",
       "kind": "text",
-      "content": "74.0 MHz",
       "textStyle": {
         "typography": "label",
         "color": "labelPrimary"
@@ -897,12 +857,11 @@
       "events": {
         "value-change": "tune-frequency"
       },
-      "accessibilityLabel": "Tune receiver frequency from 70 to 100 MHz"
+      "accessibilityLabel": "@string/a11y_frequency"
     },
     {
       "id": "strength",
       "kind": "text",
-      "content": "0% LINK",
       "textStyle": {
         "typography": "label",
         "color": "signal-amber"
@@ -955,7 +914,7 @@
         "grow": 1
       },
       "props": {
-        "text": "N",
+        "text": "@string/letter_n",
         "size": "regular",
         "container-color": "#45463B",
         "content-color": "#F1E5CD"
@@ -966,7 +925,7 @@
       "events": {
         "click-action": "enter-n"
       },
-      "accessibilityLabel": "Reply letter N"
+      "accessibilityLabel": "@string/a11y_key_n"
     },
     {
       "id": "key-a",
@@ -977,7 +936,7 @@
         "grow": 1
       },
       "props": {
-        "text": "A",
+        "text": "@string/letter_a",
         "size": "regular",
         "container-color": "#45463B",
         "content-color": "#F1E5CD"
@@ -988,7 +947,7 @@
       "events": {
         "click-action": "enter-a"
       },
-      "accessibilityLabel": "Reply letter A"
+      "accessibilityLabel": "@string/a11y_key_a"
     },
     {
       "id": "key-r",
@@ -999,7 +958,7 @@
         "grow": 1
       },
       "props": {
-        "text": "R",
+        "text": "@string/letter_r",
         "size": "regular",
         "container-color": "#45463B",
         "content-color": "#F1E5CD"
@@ -1010,7 +969,7 @@
       "events": {
         "click-action": "enter-r"
       },
-      "accessibilityLabel": "Reply letter R"
+      "accessibilityLabel": "@string/a11y_key_r"
     },
     {
       "id": "key-s",
@@ -1021,7 +980,7 @@
         "grow": 1
       },
       "props": {
-        "text": "S",
+        "text": "@string/letter_s",
         "size": "regular",
         "container-color": "#45463B",
         "content-color": "#F1E5CD"
@@ -1032,7 +991,7 @@
       "events": {
         "click-action": "enter-s"
       },
-      "accessibilityLabel": "Reply letter S"
+      "accessibilityLabel": "@string/a11y_key_s"
     },
     {
       "id": "key-u",
@@ -1043,7 +1002,7 @@
         "grow": 1
       },
       "props": {
-        "text": "U",
+        "text": "@string/letter_u",
         "size": "regular",
         "container-color": "#45463B",
         "content-color": "#F1E5CD"
@@ -1054,7 +1013,7 @@
       "events": {
         "click-action": "enter-u"
       },
-      "accessibilityLabel": "Reply letter U"
+      "accessibilityLabel": "@string/a11y_key_u"
     },
     {
       "id": "key-o",
@@ -1065,7 +1024,7 @@
         "grow": 1
       },
       "props": {
-        "text": "O",
+        "text": "@string/letter_o",
         "size": "regular",
         "container-color": "#45463B",
         "content-color": "#F1E5CD"
@@ -1076,7 +1035,7 @@
       "events": {
         "click-action": "enter-o"
       },
-      "accessibilityLabel": "Reply letter O"
+      "accessibilityLabel": "@string/a11y_key_o"
     },
     {
       "id": "erase-reply",
@@ -1087,7 +1046,7 @@
         "widthDp": 112
       },
       "props": {
-        "text": "Erase",
+        "text": "@string/erase_reply",
         "size": "regular",
         "container-color": "#45463B",
         "content-color": "#F1E5CD"
@@ -1098,7 +1057,7 @@
       "events": {
         "click-action": "erase-reply"
       },
-      "accessibilityLabel": "Erase reply"
+      "accessibilityLabel": "@string/a11y_erase_reply"
     },
     {
       "id": "submit-reply",
@@ -1109,7 +1068,7 @@
         "widthDp": 112
       },
       "props": {
-        "text": "Transmit",
+        "text": "@string/submit_reply",
         "size": "regular",
         "container-color": "#D6AF70",
         "content-color": "#211F19"
@@ -1120,7 +1079,7 @@
       "events": {
         "click-action": "submit-reply"
       },
-      "accessibilityLabel": "Transmit reply"
+      "accessibilityLabel": "@string/a11y_submit_reply"
     }
   ],
   "worlds": {

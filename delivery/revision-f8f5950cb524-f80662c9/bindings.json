@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "threejs-spatial-bindings/v1",
+  "asset": "scene.glb",
+  "units": "meters",
+  "upAxis": "+Y",
+  "frontAxis": "+Z",
+  "nodes": {
+    "diorama": "diorama",
+    "normal_world": "normal_world",
+    "alternate_world": "alternate_world",
+    "h_signal_n": "h_signal_n",
+    "h_signal_r": "h_signal_r",
+    "h_signal_u": "h_signal_u",
+    "u_signal_n": "u_signal_n",
+    "u_signal_r": "u_signal_r",
+    "u_signal_u": "u_signal_u"
+  },
+  "initialState": "normal",
+  "states": {
+    "normal": {
+      "visible": [
+        "normal_world"
+      ],
+      "hidden": [
+        "alternate_world"
+      ]
+    },
+    "alternate": {
+      "visible": [
+        "alternate_world"
+      ],
+      "hidden": [
+        "normal_world"
+      ]
+    }
+  },
+  "rotation": {
+    "target": "diorama",
+    "mode": "bounded-sweep",
+    "amplitudeDegrees": 14,
+    "degreesPerSecond": 8,
+    "fitScale": 0.78
+  },
+  "signal": {
+    "targets": [
+      "h_signal_n",
+      "h_signal_r",
+      "h_signal_u",
+      "u_signal_n",
+      "u_signal_r",
+      "u_signal_u"
+    ],
+    "letters": [
+      "r",
+      "u",
+      "n"
+    ],
+    "stepMs": 650
+  },
+  "actions": [
+    {
+      "id": "toggle_world",
+      "kind": "toggle-state"
+    },
+    {
+      "id": "play_signal",
+      "kind": "signal"
+    },
+    {
+      "id": "toggle_rotation",
+      "kind": "toggle-rotation"
+    },
+    {
+      "id": "reset",
+      "kind": "reset"
+    }
+  ],
+  "assetSha256": "f8f5950cb524df56e3b0c4429689c724c8a274d1fd2bfc71c97fd48628179534"
+}
