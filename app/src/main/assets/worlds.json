@@ -1,0 +1,22 @@
+{
+  "normal": {
+    "label": "HAWKINS, INDIANA",
+    "eyebrow": "NOVEMBER 1983",
+    "status": "A quiet room. A message waiting.",
+    "button": "Enter Upside Down",
+    "description": "Look closer. Some things are still here.",
+    "tint": "#FFFFFF",
+    "light": "#87BBDC",
+    "vineVisible": false
+  },
+  "alternate": {
+    "label": "THE UPSIDE DOWN",
+    "eyebrow": "THE OTHER SIDE",
+    "status": "Same room. Something has changed.",
+    "button": "Return to Hawkins",
+    "description": "Follow the lights. Find a way back.",
+    "tint": "#78505B",
+    "light": "#BC3347",
+    "vineVisible": true
+  }
+}

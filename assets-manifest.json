@@ -1,0 +1,73 @@
+{
+  "capture_target": "physical Swan",
+  "capture_date": "2026-10-26",
+  "assets": [
+    {
+      "path": "assets/demo-cover.png",
+      "bytes": 2165049,
+      "sha256": "6572ae98370f1814d370c7e0144e1b301a336987c6ddd8d7b3cee6e915a07826",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/demo.mp4",
+      "bytes": 21616409,
+      "sha256": "545e406a0d01860ae1d25e19f6dc4a9c831f079d328a4ccbe54b546b154e53e6",
+      "width": 2560,
+      "height": 1440,
+      "duration_seconds": 72,
+      "frames_per_second": 30,
+      "primaries": "smpte432",
+      "transfer": "iec61966-2-1"
+    },
+    {
+      "path": "assets/detail-1.png",
+      "bytes": 3680202,
+      "sha256": "484a6ac675e695f9855435c8f3d5a4e9793fe3e471060d15e62c99a0c37bf1ff",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/detail-2.png",
+      "bytes": 3696017,
+      "sha256": "e12e8b535cb2ac69469010bab278aecf451987bd7b1067904116f61963eb1fae",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/detail-3.png",
+      "bytes": 1431420,
+      "sha256": "0044f23e6ae638ba971d757f417ba95447734ac81042dccd19d94082d74a037d",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/detail-4.png",
+      "bytes": 3673803,
+      "sha256": "a6f9cdcfa39e26a900623eb8eeb70a48bab0f9a2355352b3cda21d8e9d888edf",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/icon.png",
+      "bytes": 1592359,
+      "sha256": "be6a7d59f6beeee5e5bd33369c30006084f11fc7d677b3ebe81d16335b613586",
+      "width": 1024,
+      "height": 1024,
+      "profile": "Display P3"
+    },
+    {
+      "path": "assets/landscape.png",
+      "bytes": 1991699,
+      "sha256": "454370960c61746a9ab29e677fc50b34cef4264fa101f826ec2654bb9ac1adb4",
+      "width": 2560,
+      "height": 1440,
+      "profile": "Display P3"
+    }
+  ]
+}

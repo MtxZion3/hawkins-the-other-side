@@ -1,0 +1,191 @@
+{
+  "schema": "pass",
+  "revision": 7,
+  "jsonBeforeHtml": true,
+  "embeddedSpecEqual": true,
+  "exactSpatialUIBundle": true,
+  "surfaces": [
+    "diorama"
+  ],
+  "states": [
+    "hawkins",
+    "upside-down"
+  ],
+  "transitions": [
+    "enter-other-side",
+    "return-home",
+    "reset-home"
+  ],
+  "actions": [
+    "switch-world",
+    "play-run",
+    "toggle-rotation",
+    "reset-scene",
+    "enter-n",
+    "enter-a",
+    "enter-r",
+    "enter-s",
+    "enter-u",
+    "enter-o",
+    "tune-frequency",
+    "erase-reply",
+    "submit-reply"
+  ],
+  "nodes": [
+    "room-root",
+    "scene",
+    "control-panel",
+    "toolbar-content",
+    "radio-face",
+    "radio-header",
+    "identity",
+    "title",
+    "subtitle",
+    "station",
+    "receiver",
+    "signal-readout",
+    "receiver-copy",
+    "signal-caption",
+    "status",
+    "actions-row",
+    "channel",
+    "channel-label",
+    "world-toggle",
+    "transmit",
+    "transmit-label",
+    "play-signal",
+    "inspection",
+    "motion-row",
+    "motion-label",
+    "rotation-toggle",
+    "reset-view",
+    "primary-actions",
+    "tuner",
+    "frequency-label",
+    "frequency",
+    "strength",
+    "reply-row",
+    "reply-keys",
+    "key-n",
+    "key-a",
+    "key-r",
+    "key-s",
+    "key-u",
+    "key-o",
+    "erase-reply",
+    "submit-reply"
+  ],
+  "bindings": [
+    {
+      "nodeId": "signal-readout",
+      "property": "content",
+      "path": "signalReadout"
+    },
+    {
+      "nodeId": "signal-caption",
+      "property": "content",
+      "path": "signalCaption"
+    },
+    {
+      "nodeId": "status",
+      "property": "content",
+      "path": "status"
+    },
+    {
+      "nodeId": "world-toggle",
+      "property": "selected-index",
+      "path": "worldIndex"
+    },
+    {
+      "nodeId": "world-toggle",
+      "property": "disabled",
+      "path": "worldDisabled"
+    },
+    {
+      "nodeId": "play-signal",
+      "property": "text",
+      "path": "playLabel"
+    },
+    {
+      "nodeId": "play-signal",
+      "property": "disabled",
+      "path": "listenDisabled"
+    },
+    {
+      "nodeId": "rotation-toggle",
+      "property": "checked",
+      "path": "rotating"
+    },
+    {
+      "nodeId": "rotation-toggle",
+      "property": "disabled",
+      "path": "motionDisabled"
+    },
+    {
+      "nodeId": "frequency-label",
+      "property": "content",
+      "path": "frequencyLabel"
+    },
+    {
+      "nodeId": "frequency",
+      "property": "value",
+      "path": "frequency"
+    },
+    {
+      "nodeId": "frequency",
+      "property": "disabled",
+      "path": "tunerDisabled"
+    },
+    {
+      "nodeId": "strength",
+      "property": "content",
+      "path": "strengthLabel"
+    },
+    {
+      "nodeId": "key-n",
+      "property": "disabled",
+      "path": "keyDisabled"
+    },
+    {
+      "nodeId": "key-a",
+      "property": "disabled",
+      "path": "keyDisabled"
+    },
+    {
+      "nodeId": "key-r",
+      "property": "disabled",
+      "path": "keyDisabled"
+    },
+    {
+      "nodeId": "key-s",
+      "property": "disabled",
+      "path": "keyDisabled"
+    },
+    {
+      "nodeId": "key-u",
+      "property": "disabled",
+      "path": "keyDisabled"
+    },
+    {
+      "nodeId": "key-o",
+      "property": "disabled",
+      "path": "keyDisabled"
+    },
+    {
+      "nodeId": "erase-reply",
+      "property": "disabled",
+      "path": "eraseDisabled"
+    },
+    {
+      "nodeId": "submit-reply",
+      "property": "disabled",
+      "path": "submitDisabled"
+    }
+  ],
+  "responsiveRules": [
+    "compact-radio"
+  ],
+  "assets": [
+    "room-geometry"
+  ]
+}

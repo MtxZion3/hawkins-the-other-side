@@ -1,0 +1,30 @@
+app:
+  name: 'Hawkins: The Other Side'
+  slogan: '转动电台刻度，寻找字母灯墙另一侧的信号'
+  description: |-
+    把一间充满 1980 年代气息的客厅，放到你面前的立体微缩空间里。在正常世界与 Upside Down 之间切换，观察沙发、电视、藤蔓和字母灯墙的变化。
+    用复古收音机面板调节频率，找到信号后点击 Listen，记住灯墙依次点亮的字母，再通过字母键回复并按 Transmit 发送。Slow Sweep 可缓慢转动场景，Reset 可重新开始。
+    原生 PICO Spatial 应用，英文界面，以视觉信号为主；应用本身无需账号和联网。当前为独立、非官方的粉丝灵感技术原型，使用程序化原创场景，不代表影视作品官方产品。已在 Swan 真机运行，其他设备与长期性能尚未完整验证。
+  tags: ['空间解谜', '复古电台', '微缩场景', '休闲']
+  category: game
+  icon: assets/icon.png
+  landscape: assets/landscape.png
+  detail_images:
+    - assets/detail-1.png
+    - assets/detail-2.png
+    - assets/detail-3.png
+    - assets/detail-4.png
+  videos:
+    - file: assets/demo.mp4
+      cover: assets/demo-cover.png
+version:
+  name: 1.0.1
+  notes: '新增与应用主题一致的复古电台图标，替换模板启动图标；整理公开构建源码、玩法说明及真机演示物料，保留双世界切换、调频、灯序接收和回复解谜。'
+build:
+  repo_url: https://github.com/MtxZion3/hawkins-the-other-side
+  repo_visibility: public
+  tech_stack: android_spatial
+  ai_tool: Codex CLI
+  ai_model: GPT-6
+  features: [mixed_reality]
+  teammates: []

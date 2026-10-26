@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createRequire} from 'node:module';
+const here=path.dirname(fileURLToPath(import.meta.url));
+const dir=path.dirname(here);
+// Override when spatial-craft is not a sibling checkout.
+const root=process.env.SPATIAL_CRAFT_ROOT || path.resolve(dir,'../../spatial-craft');
+const require=createRequire(path.join(dir,'../authoring/package.json'));
+const esbuild=require('esbuild');
+const skill=path.join(root,'plugin-workspace/publish/pico-spatial-agentic-tools/skills/pico-spatial-app-designer');
+const Ajv=createRequire(path.join(root,'package.json'))('ajv/dist/2020');
+const schema=JSON.parse(fs.readFileSync(path.join(skill,'assets/design-spec.schema.json'),'utf8'));
+const json=fs.readFileSync(path.join(dir,'design-spec.json'),'utf8');const spec=JSON.parse(json);
+const validate=new Ajv({strict:false}).compile(schema);if(!validate(spec))throw Error(JSON.stringify(validate.errors));
+const bundle=fs.readFileSync(path.join(skill,'assets/spatialui-web/spatialui.bundle.js'),'utf8');
+const three=await esbuild.build({stdin:{contents:"export * from 'three'; export {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';",resolveDir:path.join(dir,'../authoring'),loader:'js'},bundle:true,write:false,format:'iife',globalName:'THREE',minify:true});
+const renderer=fs.readFileSync(path.join(here,'receiver-rules.cjs'),'utf8')+'\n'+fs.readFileSync(path.join(here,'renderer.js'),'utf8');
+const materialCss='.material-regular{background:var(--Background-MaterialRegular,rgba(255,255,255,.34));}';
+const css='*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#1d211e;display:flex;align-items:flex-start;justify-content:center}main{width:100%;isolation:isolate}p{margin:0}canvas{display:block;width:100%;height:100%}[hidden]{display:none!important}[data-kind=domain_visual]{touch-action:none;cursor:grab}[data-kind=domain_visual]:active{cursor:grabbing}'+materialCss;
+const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title></title><style>'+css+'</style></head><body><main id="app" data-design-spec-revision="'+spec.metadata.revision+'"></main><script id="spatialui-vendored">'+bundle+'</script><script id="three-vendored">'+three.outputFiles[0].text.replaceAll('</script','<\\/script')+'</script><script id="pico-design-spec" type="application/json">'+json+'</script><script>'+renderer+'</script></body></html>';
+fs.writeFileSync(path.join(dir,'preview.html'),html);
+const report={schema:'pass',revision:spec.metadata.revision,jsonBeforeHtml:true,embeddedSpecEqual:JSON.stringify(JSON.parse(html.match(/<script id="pico-design-spec" type="application\/json">([\s\S]*?)<\/script>/)[1]))===JSON.stringify(spec),exactSpatialUIBundle:html.includes('<script id="spatialui-vendored">'+bundle+'</script>'),surfaces:spec.surfaces.map(x=>x.id),states:spec.states.map(x=>x.id),transitions:spec.transitions.map(x=>x.id),actions:spec.actions.map(x=>x.id),nodes:spec.nodes.map(x=>x.id),bindings:spec.nodes.flatMap(x=>Object.entries(x.bindings||{}).map(([k,v])=>({nodeId:x.id,property:k,path:v}))),responsiveRules:spec.responsiveRules.map(x=>x.id),assets:spec.assets.map(x=>x.id)};
+fs.writeFileSync(path.join(here,'coverage-manifest.json'),JSON.stringify(report,null,2));
+console.log(JSON.stringify({schema:report.schema,embeddedSpecEqual:report.embeddedSpecEqual,exactSpatialUIBundle:report.exactSpatialUIBundle,bytes:html.length}));

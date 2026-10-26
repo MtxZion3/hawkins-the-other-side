@@ -1,0 +1,18 @@
+import {readFile, mkdir, copyFile, writeFile} from "node:fs/promises";
+import {createHash} from "node:crypto";
+const root = new URL("../", import.meta.url);
+const latest = JSON.parse(await readFile(new URL("delivery/latest.json", root)));
+if (!/^revision-[a-f0-9]+-[a-f0-9]+$/.test(latest.revision)) throw Error("Invalid revision");
+const revision = new URL(`delivery/${latest.revision}/`, root);
+const bindings = JSON.parse(await readFile(new URL("bindings.json", revision)));
+const report = JSON.parse(await readFile(new URL("export-report.json", revision)));
+const bytes = await readFile(new URL("scene.glb", revision));
+const hash = createHash("sha256").update(bytes).digest("hex");
+if (hash !== latest.assetSha256 || hash !== bindings.assetSha256 || hash !== report.assetSha256 || report.status !== "passed") throw Error("Inconsistent export revision");
+const assets = new URL("app/src/main/assets/", root);
+await mkdir(assets, {recursive: true});
+for (const file of ["scene.glb", "bindings.json", "export-report.json"]) await copyFile(new URL(file, revision), new URL(file, assets));
+const spec = JSON.parse(await readFile(new URL("design/design-spec.json", root)));
+const worlds = spec.nodes.find(node => node.id === "scene").props.worlds;
+await writeFile(new URL("worlds.json", assets), JSON.stringify({normal: worlds.hawkins, alternate: worlds["upside-down"]}, null, 2));
+console.log(JSON.stringify({revision: latest.revision, assetSha256: hash, target: "app/src/main/assets"}));

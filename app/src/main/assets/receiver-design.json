@@ -1,0 +1,1157 @@
+{
+  "metadata": {
+    "projectName": "Hawkins: The Other Side",
+    "sourceMode": "hybrid",
+    "revision": 7
+  },
+  "theme": {
+    "scheme": "vibrant",
+    "rootMaterial": "regular",
+    "colorScheme": {
+      "fillPrimary": {
+        "source": "fixed",
+        "value": "#D6AF70"
+      },
+      "fillSecondary": {
+        "source": "fixed",
+        "value": "#625948"
+      },
+      "fillTertiary": {
+        "source": "fixed",
+        "value": "#34362E"
+      },
+      "fillLight": {
+        "source": "fixed",
+        "value": "#45463B"
+      },
+      "labelPrimaryLight": {
+        "source": "fixed",
+        "value": "#211F19"
+      },
+      "labelPrimary": {
+        "source": "fixed",
+        "value": "#F1E5CD"
+      },
+      "labelSecondary": {
+        "source": "fixed",
+        "value": "#C7BEA9"
+      },
+      "labelTertiary": {
+        "source": "fixed",
+        "value": "#BBB39F"
+      },
+      "labelQuaternary": {
+        "source": "fixed",
+        "value": "#A9A28E"
+      },
+      "lightenHover": {
+        "source": "fixed",
+        "value": "#14FFFFFF"
+      },
+      "lightenPressed": {
+        "source": "fixed",
+        "value": "#26FFFFFF"
+      },
+      "error": {
+        "source": "fixed",
+        "value": "#E7857A"
+      },
+      "alert": {
+        "source": "fixed",
+        "value": "#D6AF70"
+      },
+      "passable": {
+        "source": "fixed",
+        "value": "#B8C89A"
+      },
+      "interaction": {
+        "source": "fixed",
+        "value": "#D6AF70"
+      },
+      "dividerLine": {
+        "source": "fixed",
+        "value": "#625948"
+      }
+    },
+    "brandColors": {
+      "midnight": "#162C40",
+      "cold-light": "#94C6DC",
+      "rift-red": "#A63844",
+      "signal-amber": "#E5B86B",
+      "plaster": "#B9AA85",
+      "wood": "#48392B",
+      "sofa": "#82614E",
+      "rug": "#622E36",
+      "ink": "#34282A",
+      "vine": "#361F29",
+      "receiver-shell": "#242620",
+      "receiver-screen": "#151C17",
+      "receiver-red": "#DD8275",
+      "receiver-dim": "#736D53"
+    },
+    "typography": {
+      "display": {
+        "family": "Georgia, serif",
+        "sizeDp": 30,
+        "lineHeightDp": 34,
+        "weight": 700
+      },
+      "subtitle": {
+        "family": "Courier New, monospace",
+        "sizeDp": 15,
+        "lineHeightDp": 20,
+        "weight": 600
+      },
+      "body": {
+        "family": "Arial, sans-serif",
+        "sizeDp": 16,
+        "lineHeightDp": 24,
+        "weight": 400
+      },
+      "label": {
+        "family": "Courier New, monospace",
+        "sizeDp": 12,
+        "lineHeightDp": 18,
+        "weight": 600
+      },
+      "readout": {
+        "family": "Courier New, monospace",
+        "sizeDp": 30,
+        "lineHeightDp": 36,
+        "weight": 700
+      }
+    },
+    "spacing": {
+      "small": 8,
+      "regular": 16,
+      "medium": 24,
+      "large": 32
+    }
+  },
+  "actions": [
+    {
+      "id": "switch-world",
+      "type": "custom",
+      "purpose": "Switch the room world while preserving inspection angle; cancel any active message.",
+      "payload": {
+        "operation": "world",
+        "transitionIds": [
+          "enter-other-side",
+          "return-home"
+        ],
+        "targetStates": [
+          "hawkins",
+          "upside-down"
+        ],
+        "nativeStates": [
+          "normal",
+          "alternate"
+        ]
+      }
+    },
+    {
+      "id": "play-run",
+      "type": "custom",
+      "purpose": "Receive the three-letter clue on the 3D wall; replay without revealing it as 2D text.",
+      "payload": {
+        "operation": "sequence",
+        "configNodeId": "scene",
+        "configPath": "signal",
+        "playingText": "Sending RUN…",
+        "completedText": "MESSAGE RECEIVED / RUN",
+        "readyText": "ALPHABET LINK / STANDBY",
+        "playingStatus": "Watch the alphabet wall.",
+        "playLabel": "Sending…",
+        "idleLabel": "Send RUN"
+      }
+    },
+    {
+      "id": "toggle-rotation",
+      "type": "toggle",
+      "purpose": "Turn the miniature slowly or freeze it without moving the camera.",
+      "binding": "rotating",
+      "payload": {
+        "labels": {
+          "true": "Pause motion",
+          "false": "Inspect motion"
+        }
+      }
+    },
+    {
+      "id": "reset-scene",
+      "type": "custom",
+      "purpose": "Cancel signal; restore Hawkins, angle zero, and paused motion. Nothing is deleted.",
+      "payload": {
+        "operation": "reset",
+        "targetStateId": "hawkins",
+        "transitionId": "reset-home"
+      }
+    },
+    {
+      "id": "enter-n",
+      "type": "custom",
+      "purpose": "Append a reply letter after hearing the message.",
+      "payload": {
+        "operation": "reply-letter",
+        "letter": "N"
+      }
+    },
+    {
+      "id": "enter-a",
+      "type": "custom",
+      "purpose": "Append a reply letter after hearing the message.",
+      "payload": {
+        "operation": "reply-letter",
+        "letter": "A"
+      }
+    },
+    {
+      "id": "enter-r",
+      "type": "custom",
+      "purpose": "Append a reply letter after hearing the message.",
+      "payload": {
+        "operation": "reply-letter",
+        "letter": "R"
+      }
+    },
+    {
+      "id": "enter-s",
+      "type": "custom",
+      "purpose": "Append a reply letter after hearing the message.",
+      "payload": {
+        "operation": "reply-letter",
+        "letter": "S"
+      }
+    },
+    {
+      "id": "enter-u",
+      "type": "custom",
+      "purpose": "Append a reply letter after hearing the message.",
+      "payload": {
+        "operation": "reply-letter",
+        "letter": "U"
+      }
+    },
+    {
+      "id": "enter-o",
+      "type": "custom",
+      "purpose": "Append a reply letter after hearing the message.",
+      "payload": {
+        "operation": "reply-letter",
+        "letter": "O"
+      }
+    },
+    {
+      "id": "tune-frequency",
+      "type": "custom",
+      "purpose": "Find the signal; brightness and receiver strength respond together.",
+      "payload": {
+        "operation": "tune-frequency"
+      }
+    },
+    {
+      "id": "erase-reply",
+      "type": "custom",
+      "purpose": "Remove the last reply letter.",
+      "payload": {
+        "operation": "erase-reply"
+      }
+    },
+    {
+      "id": "submit-reply",
+      "type": "custom",
+      "purpose": "Check the observed sequence; correct reply lights the wall and restores Hawkins.",
+      "payload": {
+        "operation": "submit-reply"
+      }
+    }
+  ],
+  "dataCases": {
+    "normal": {
+      "worldId": "hawkins",
+      "rotating": false,
+      "rotationLabel": "Inspect motion",
+      "playLabel": "Send RUN",
+      "busy": false,
+      "status": "A quiet room. A message waiting.",
+      "signalCaption": "ALPHABET LINK / STANDBY",
+      "signalIndex": -1,
+      "angle": 0,
+      "geometryAvailable": true,
+      "detailAvailable": true,
+      "signalReadout": "· · ·"
+    },
+    "fallback": {
+      "worldId": "hawkins",
+      "rotating": false,
+      "rotationLabel": "Inspect motion",
+      "playLabel": "Send RUN",
+      "busy": false,
+      "status": "A quieter scene. The lights still work.",
+      "signalCaption": "LOCAL LINK / READY",
+      "signalIndex": -1,
+      "angle": 0,
+      "geometryAvailable": true,
+      "detailAvailable": false,
+      "signalReadout": "· · ·"
+    },
+    "error": {
+      "worldId": "hawkins",
+      "rotating": false,
+      "rotationLabel": "Inspect motion",
+      "playLabel": "Send RUN",
+      "busy": true,
+      "status": "The room could not appear. Reset to try again.",
+      "signalCaption": "LINK UNAVAILABLE",
+      "signalIndex": -1,
+      "angle": 0,
+      "geometryAvailable": false,
+      "detailAvailable": true,
+      "signalReadout": "· · ·"
+    }
+  },
+  "responsiveRules": [
+    {
+      "id": "compact-radio",
+      "surfaceId": "diorama",
+      "when": {
+        "maxWidthDp": 760
+      },
+      "overrides": [
+        {
+          "nodeId": "toolbar-content",
+          "layout": {
+            "mode": "column",
+            "widthDp": 560,
+            "paddingDp": 8
+          }
+        },
+        {
+          "nodeId": "station",
+          "hidden": true
+        },
+        {
+          "nodeId": "actions-row",
+          "layout": {
+            "mode": "column",
+            "gapDp": 16,
+            "align": "start"
+          }
+        },
+        {
+          "nodeId": "channel",
+          "layout": {
+            "mode": "column",
+            "widthDp": 244,
+            "gapDp": 8
+          }
+        },
+        {
+          "nodeId": "inspection",
+          "layout": {
+            "mode": "row",
+            "gapDp": 16,
+            "align": "center",
+            "widthDp": 512
+          }
+        },
+        {
+          "nodeId": "scene",
+          "layout": {
+            "mode": "stack",
+            "heightDp": 430,
+            "minHeightDp": 350
+          }
+        },
+        {
+          "nodeId": "room-root",
+          "layout": {
+            "mode": "column",
+            "heightDp": 880
+          }
+        },
+        {
+          "nodeId": "primary-actions",
+          "layout": {
+            "mode": "row",
+            "gapDp": 16,
+            "widthDp": 512,
+            "align": "end"
+          }
+        },
+        {
+          "nodeId": "motion-row",
+          "layout": {
+            "mode": "row",
+            "gapDp": 8,
+            "widthDp": 244,
+            "align": "center",
+            "justify": "space-between",
+            "minHeightDp": 56
+          }
+        },
+        {
+          "nodeId": "reply-row",
+          "layout": {
+            "mode": "column",
+            "gapDp": 8
+          }
+        },
+        {
+          "nodeId": "reply-keys",
+          "layout": {
+            "mode": "row",
+            "gapDp": 8,
+            "widthDp": 512
+          }
+        },
+        {
+          "nodeId": "frequency-label",
+          "layout": {
+            "mode": "row",
+            "widthDp": 88
+          }
+        },
+        {
+          "nodeId": "strength",
+          "layout": {
+            "mode": "row",
+            "widthDp": 72
+          }
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "control-panel",
+      "kind": "spatialui",
+      "children": [
+        "toolbar-content"
+      ],
+      "props": {
+        "for": "room-root",
+        "corner-radius": 24,
+        "nativeMapping": {
+          "component": "Toolbar",
+          "anchor": "BottomFront",
+          "positionOwner": "system",
+          "rootMaterialAppliesTo": "control-panel; transparent volumetric scene",
+          "nativeDefaultContentSizeDp": [
+            880,
+            460
+          ],
+          "nativeMinContentSizeDp": [
+            560,
+            570
+          ],
+          "nativeMaxContentSizeDp": [
+            880,
+            460
+          ]
+        },
+        "loading": {
+          "status": "The room is appearing…",
+          "signalCaption": "ESTABLISHING LINK",
+          "signalReadout": "· · ·"
+        },
+        "puzzle": {
+          "minFrequency": 70,
+          "maxFrequency": 100,
+          "initialFrequency": 74,
+          "targetFrequency": 83,
+          "tolerance": 0.8,
+          "noiseStepSeconds": 0.65,
+          "keys": [
+            "N",
+            "A",
+            "R",
+            "S",
+            "U",
+            "O"
+          ],
+          "replyLength": 3,
+          "phaseCopy": {
+            "search": [
+              "01 / FIND THE SIGNAL",
+              "Slide the dial. Watch the lights grow steady."
+            ],
+            "locked": [
+              "01 / CHANNEL LOCKED",
+              "Listen, then remember the order on the wall."
+            ],
+            "listening": [
+              "02 / WATCH THE ALPHABET WALL",
+              "Remember the three letters. The receiver cannot decode them."
+            ],
+            "reply": [
+              "03 / REPLY TO THE OTHER SIDE",
+              "Enter the letters in the order you saw them."
+            ],
+            "wrong": [
+              "03 / NO RESPONSE",
+              "That reply did not connect. Clear it or listen again."
+            ],
+            "solved": [
+              "CONTACT ESTABLISHED",
+              "You found a way through. The room is safe for now."
+            ]
+          },
+          "labels": {
+            "listen": "Listen",
+            "replay": "Hear again",
+            "listening": "Receiving…",
+            "solved": "Connected",
+            "send": "Transmit",
+            "clear": "Erase",
+            "frequencySuffix": " MHz",
+            "strengthSuffix": "% LINK"
+          }
+        }
+      },
+      "component": "sui-toolbar"
+    },
+    {
+      "id": "toolbar-content",
+      "kind": "layout",
+      "layout": {
+        "mode": "column",
+        "widthDp": 880,
+        "paddingDp": 8
+      },
+      "children": [
+        "radio-face"
+      ]
+    },
+    {
+      "id": "radio-face",
+      "kind": "layout",
+      "layout": {
+        "mode": "column",
+        "paddingDp": 16,
+        "gapDp": 16
+      },
+      "children": [
+        "radio-header",
+        "receiver",
+        "tuner",
+        "actions-row",
+        "reply-row"
+      ],
+      "appearance": {
+        "fill": "receiver-shell",
+        "radiusDp": 18
+      }
+    },
+    {
+      "id": "radio-header",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "justify": "space-between",
+        "align": "center",
+        "gapDp": 16
+      },
+      "children": [
+        "identity",
+        "station"
+      ]
+    },
+    {
+      "id": "identity",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "gapDp": 16,
+        "align": "center",
+        "grow": 1
+      },
+      "children": [
+        "title",
+        "subtitle"
+      ]
+    },
+    {
+      "id": "title",
+      "kind": "text",
+      "content": "HAWKINS",
+      "textStyle": {
+        "typography": "display",
+        "color": "receiver-red"
+      }
+    },
+    {
+      "id": "subtitle",
+      "kind": "text",
+      "content": "FIELD RECEIVER",
+      "textStyle": {
+        "typography": "label",
+        "color": "labelSecondary"
+      }
+    },
+    {
+      "id": "station",
+      "kind": "text",
+      "content": "BYERS RESIDENCE / NOV 1983",
+      "textStyle": {
+        "typography": "label",
+        "color": "labelSecondary"
+      }
+    },
+    {
+      "id": "receiver",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "align": "center",
+        "gapDp": 24,
+        "paddingDp": 16,
+        "minHeightDp": 88
+      },
+      "children": [
+        "signal-readout",
+        "receiver-copy"
+      ],
+      "appearance": {
+        "fill": "receiver-screen",
+        "radiusDp": 8
+      }
+    },
+    {
+      "id": "signal-readout",
+      "kind": "text",
+      "content": "· · ·",
+      "textStyle": {
+        "typography": "readout",
+        "color": "signal-amber"
+      },
+      "bindings": {
+        "content": "signalReadout"
+      },
+      "layout": {
+        "minWidthDp": 150,
+        "mode": "row"
+      }
+    },
+    {
+      "id": "receiver-copy",
+      "kind": "layout",
+      "layout": {
+        "mode": "column",
+        "gapDp": 0,
+        "grow": 1
+      },
+      "children": [
+        "signal-caption",
+        "status"
+      ]
+    },
+    {
+      "id": "signal-caption",
+      "kind": "text",
+      "content": "",
+      "textStyle": {
+        "typography": "label",
+        "color": "signal-amber"
+      },
+      "bindings": {
+        "content": "signalCaption"
+      }
+    },
+    {
+      "id": "status",
+      "kind": "text",
+      "content": "",
+      "textStyle": {
+        "typography": "body",
+        "color": "labelSecondary"
+      },
+      "bindings": {
+        "content": "status"
+      }
+    },
+    {
+      "id": "actions-row",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "gapDp": 16,
+        "align": "end"
+      },
+      "children": [
+        "primary-actions",
+        "inspection"
+      ]
+    },
+    {
+      "id": "channel",
+      "kind": "layout",
+      "layout": {
+        "mode": "column",
+        "gapDp": 8,
+        "widthDp": 280
+      },
+      "children": [
+        "channel-label",
+        "world-toggle"
+      ]
+    },
+    {
+      "id": "channel-label",
+      "kind": "text",
+      "content": "CONTACT WORLD",
+      "textStyle": {
+        "typography": "label",
+        "color": "labelSecondary"
+      }
+    },
+    {
+      "id": "world-toggle",
+      "kind": "spatialui",
+      "component": "sui-segment-control",
+      "props": {
+        "size": "regular",
+        "options": "Hawkins,Upside Down",
+        "selected-index": 0
+      },
+      "bindings": {
+        "selected-index": "worldIndex",
+        "disabled": "worldDisabled"
+      },
+      "events": {
+        "select": "switch-world"
+      },
+      "accessibilityLabel": "Choose contact world"
+    },
+    {
+      "id": "transmit",
+      "kind": "layout",
+      "layout": {
+        "mode": "column",
+        "gapDp": 8,
+        "grow": 1
+      },
+      "children": [
+        "transmit-label",
+        "play-signal"
+      ]
+    },
+    {
+      "id": "transmit-label",
+      "kind": "text",
+      "content": "02 / RECEIVE",
+      "textStyle": {
+        "typography": "label",
+        "color": "labelSecondary"
+      }
+    },
+    {
+      "id": "play-signal",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "props": {
+        "size": "max",
+        "text": "Send RUN",
+        "container-color": "#D6AF70",
+        "content-color": "#211F19"
+      },
+      "bindings": {
+        "text": "playLabel",
+        "disabled": "listenDisabled"
+      },
+      "events": {
+        "click-action": "play-run"
+      },
+      "accessibilityLabel": "Listen to the alphabet wall or replay its message"
+    },
+    {
+      "id": "inspection",
+      "kind": "layout",
+      "layout": {
+        "mode": "column",
+        "gapDp": 8,
+        "widthDp": 170
+      },
+      "children": [
+        "motion-row",
+        "reset-view"
+      ]
+    },
+    {
+      "id": "motion-row",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "justify": "space-between",
+        "align": "center",
+        "minHeightDp": 32
+      },
+      "children": [
+        "motion-label",
+        "rotation-toggle"
+      ]
+    },
+    {
+      "id": "motion-label",
+      "kind": "text",
+      "content": "SLOW SWEEP",
+      "textStyle": {
+        "typography": "label",
+        "color": "labelSecondary"
+      }
+    },
+    {
+      "id": "rotation-toggle",
+      "kind": "spatialui",
+      "component": "sui-switch",
+      "props": {},
+      "bindings": {
+        "checked": "rotating",
+        "disabled": "motionDisabled"
+      },
+      "events": {
+        "checked-change": "toggle-rotation"
+      },
+      "accessibilityLabel": "Slowly rotate the miniature"
+    },
+    {
+      "id": "reset-view",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "props": {
+        "text": "Reset",
+        "size": "regular",
+        "container-color": "#45463B",
+        "content-color": "#F1E5CD"
+      },
+      "bindings": {},
+      "events": {
+        "click-action": "reset-scene"
+      },
+      "accessibilityLabel": "Reset room and receiver"
+    },
+    {
+      "id": "primary-actions",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "gapDp": 16,
+        "grow": 1,
+        "align": "end"
+      },
+      "children": [
+        "channel",
+        "transmit"
+      ]
+    },
+    {
+      "id": "tuner",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "align": "center",
+        "gapDp": 16
+      },
+      "children": [
+        "frequency-label",
+        "frequency",
+        "strength"
+      ]
+    },
+    {
+      "id": "frequency-label",
+      "kind": "text",
+      "content": "74.0 MHz",
+      "textStyle": {
+        "typography": "label",
+        "color": "labelPrimary"
+      },
+      "bindings": {
+        "content": "frequencyLabel"
+      },
+      "layout": {
+        "mode": "row",
+        "widthDp": 110
+      }
+    },
+    {
+      "id": "frequency",
+      "kind": "spatialui",
+      "component": "sui-slider",
+      "layout": {
+        "mode": "row",
+        "grow": 1,
+        "minHeightDp": 56
+      },
+      "props": {
+        "min": 70,
+        "max": 100,
+        "value": 74,
+        "size": "regular",
+        "width": "100%"
+      },
+      "bindings": {
+        "value": "frequency",
+        "disabled": "tunerDisabled"
+      },
+      "events": {
+        "value-change": "tune-frequency"
+      },
+      "accessibilityLabel": "Tune receiver frequency from 70 to 100 MHz"
+    },
+    {
+      "id": "strength",
+      "kind": "text",
+      "content": "0% LINK",
+      "textStyle": {
+        "typography": "label",
+        "color": "signal-amber"
+      },
+      "bindings": {
+        "content": "strengthLabel"
+      },
+      "layout": {
+        "mode": "row",
+        "widthDp": 100
+      }
+    },
+    {
+      "id": "reply-row",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "gapDp": 8,
+        "align": "center"
+      },
+      "children": [
+        "reply-keys",
+        "erase-reply",
+        "submit-reply"
+      ]
+    },
+    {
+      "id": "reply-keys",
+      "kind": "layout",
+      "layout": {
+        "mode": "row",
+        "gapDp": 8,
+        "grow": 1
+      },
+      "children": [
+        "key-n",
+        "key-a",
+        "key-r",
+        "key-s",
+        "key-u",
+        "key-o"
+      ]
+    },
+    {
+      "id": "key-n",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "layout": {
+        "mode": "row",
+        "grow": 1
+      },
+      "props": {
+        "text": "N",
+        "size": "regular",
+        "container-color": "#45463B",
+        "content-color": "#F1E5CD"
+      },
+      "bindings": {
+        "disabled": "keyDisabled"
+      },
+      "events": {
+        "click-action": "enter-n"
+      },
+      "accessibilityLabel": "Reply letter N"
+    },
+    {
+      "id": "key-a",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "layout": {
+        "mode": "row",
+        "grow": 1
+      },
+      "props": {
+        "text": "A",
+        "size": "regular",
+        "container-color": "#45463B",
+        "content-color": "#F1E5CD"
+      },
+      "bindings": {
+        "disabled": "keyDisabled"
+      },
+      "events": {
+        "click-action": "enter-a"
+      },
+      "accessibilityLabel": "Reply letter A"
+    },
+    {
+      "id": "key-r",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "layout": {
+        "mode": "row",
+        "grow": 1
+      },
+      "props": {
+        "text": "R",
+        "size": "regular",
+        "container-color": "#45463B",
+        "content-color": "#F1E5CD"
+      },
+      "bindings": {
+        "disabled": "keyDisabled"
+      },
+      "events": {
+        "click-action": "enter-r"
+      },
+      "accessibilityLabel": "Reply letter R"
+    },
+    {
+      "id": "key-s",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "layout": {
+        "mode": "row",
+        "grow": 1
+      },
+      "props": {
+        "text": "S",
+        "size": "regular",
+        "container-color": "#45463B",
+        "content-color": "#F1E5CD"
+      },
+      "bindings": {
+        "disabled": "keyDisabled"
+      },
+      "events": {
+        "click-action": "enter-s"
+      },
+      "accessibilityLabel": "Reply letter S"
+    },
+    {
+      "id": "key-u",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "layout": {
+        "mode": "row",
+        "grow": 1
+      },
+      "props": {
+        "text": "U",
+        "size": "regular",
+        "container-color": "#45463B",
+        "content-color": "#F1E5CD"
+      },
+      "bindings": {
+        "disabled": "keyDisabled"
+      },
+      "events": {
+        "click-action": "enter-u"
+      },
+      "accessibilityLabel": "Reply letter U"
+    },
+    {
+      "id": "key-o",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "layout": {
+        "mode": "row",
+        "grow": 1
+      },
+      "props": {
+        "text": "O",
+        "size": "regular",
+        "container-color": "#45463B",
+        "content-color": "#F1E5CD"
+      },
+      "bindings": {
+        "disabled": "keyDisabled"
+      },
+      "events": {
+        "click-action": "enter-o"
+      },
+      "accessibilityLabel": "Reply letter O"
+    },
+    {
+      "id": "erase-reply",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "layout": {
+        "mode": "row",
+        "widthDp": 112
+      },
+      "props": {
+        "text": "Erase",
+        "size": "regular",
+        "container-color": "#45463B",
+        "content-color": "#F1E5CD"
+      },
+      "bindings": {
+        "disabled": "eraseDisabled"
+      },
+      "events": {
+        "click-action": "erase-reply"
+      },
+      "accessibilityLabel": "Erase reply"
+    },
+    {
+      "id": "submit-reply",
+      "kind": "spatialui",
+      "component": "sui-button",
+      "layout": {
+        "mode": "row",
+        "widthDp": 112
+      },
+      "props": {
+        "text": "Transmit",
+        "size": "regular",
+        "container-color": "#D6AF70",
+        "content-color": "#211F19"
+      },
+      "bindings": {
+        "disabled": "submitDisabled"
+      },
+      "events": {
+        "click-action": "submit-reply"
+      },
+      "accessibilityLabel": "Transmit reply"
+    }
+  ],
+  "worlds": {
+    "hawkins": {
+      "label": "HAWKINS, INDIANA",
+      "eyebrow": "NOVEMBER 1983",
+      "status": "A quiet room. A message waiting.",
+      "button": "Enter Upside Down",
+      "description": "Look closer. Some things are still here.",
+      "tint": "#FFFFFF",
+      "light": "#87BBDC",
+      "vineVisible": false
+    },
+    "upside-down": {
+      "label": "THE UPSIDE DOWN",
+      "eyebrow": "THE OTHER SIDE",
+      "status": "Same room. Something has changed.",
+      "button": "Return to Hawkins",
+      "description": "Follow the lights. Find a way back.",
+      "tint": "#78505B",
+      "light": "#BC3347",
+      "vineVisible": true
+    }
+  },
+  "signal": {
+    "letters": [
+      "R",
+      "U",
+      "N"
+    ],
+    "stepMs": 650,
+    "holdMs": 650
+  }
+}

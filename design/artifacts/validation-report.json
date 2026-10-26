@@ -1,0 +1,215 @@
+{
+  "scope": "web_design_validation_only",
+  "verdict": "pass",
+  "deviceValidation": "not_performed",
+  "checks": [
+    {
+      "name": "initial state",
+      "pass": true
+    },
+    {
+      "name": "enter-other-side",
+      "pass": true
+    },
+    {
+      "name": "return-home",
+      "pass": true
+    },
+    {
+      "name": "signal R",
+      "pass": true
+    },
+    {
+      "name": "signal U",
+      "pass": true
+    },
+    {
+      "name": "signal N",
+      "pass": true
+    },
+    {
+      "name": "signal complete",
+      "pass": true
+    },
+    {
+      "name": "inspect motion",
+      "pass": true
+    },
+    {
+      "name": "pause motion",
+      "pass": true
+    },
+    {
+      "name": "reset-home",
+      "pass": true
+    },
+    {
+      "name": "fallback usable",
+      "pass": true
+    },
+    {
+      "name": "fallback signal",
+      "pass": true
+    },
+    {
+      "name": "error disables signal",
+      "pass": true
+    },
+    {
+      "name": "retry reset",
+      "pass": true
+    },
+    {
+      "name": "minimum no horizontal overflow",
+      "pass": true,
+      "detail": {
+        "scroll": 640,
+        "width": 640,
+        "grid": "grid",
+        "buttons": [
+          {
+            "id": "world-toggle",
+            "w": 260,
+            "h": 56
+          },
+          {
+            "id": "play-signal",
+            "w": 260,
+            "h": 56
+          },
+          {
+            "id": "rotation-toggle",
+            "w": 260,
+            "h": 56
+          },
+          {
+            "id": "reset-view",
+            "w": 260,
+            "h": 56
+          }
+        ]
+      }
+    },
+    {
+      "name": "minimum responsive controls",
+      "pass": true
+    },
+    {
+      "name": "hit targets",
+      "pass": true
+    },
+    {
+      "name": "reduced motion",
+      "pass": true
+    },
+    {
+      "name": "no native control duplicates",
+      "pass": true
+    },
+    {
+      "name": "registered components",
+      "pass": true,
+      "detail": [
+        {
+          "id": "control-panel",
+          "tag": "sui-toolbar",
+          "registered": true
+        },
+        {
+          "id": "world-toggle",
+          "tag": "sui-button",
+          "registered": true
+        },
+        {
+          "id": "play-signal",
+          "tag": "sui-button",
+          "registered": true
+        },
+        {
+          "id": "rotation-toggle",
+          "tag": "sui-button",
+          "registered": true
+        },
+        {
+          "id": "reset-view",
+          "tag": "sui-button",
+          "registered": true
+        }
+      ]
+    },
+    {
+      "name": "no browser errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "offline self contained",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "registration": [
+    {
+      "id": "control-panel",
+      "tag": "sui-toolbar",
+      "registered": true
+    },
+    {
+      "id": "world-toggle",
+      "tag": "sui-button",
+      "registered": true
+    },
+    {
+      "id": "play-signal",
+      "tag": "sui-button",
+      "registered": true
+    },
+    {
+      "id": "rotation-toggle",
+      "tag": "sui-button",
+      "registered": true
+    },
+    {
+      "id": "reset-view",
+      "tag": "sui-button",
+      "registered": true
+    }
+  ],
+  "errors": [],
+  "minimum": {
+    "scroll": 640,
+    "width": 640,
+    "grid": "grid",
+    "buttons": [
+      {
+        "id": "world-toggle",
+        "w": 260,
+        "h": 56
+      },
+      {
+        "id": "play-signal",
+        "w": 260,
+        "h": 56
+      },
+      {
+        "id": "rotation-toggle",
+        "w": 260,
+        "h": 56
+      },
+      {
+        "id": "reset-view",
+        "w": 260,
+        "h": 56
+      }
+    ]
+  },
+  "screenshots": [
+    "default-hawkins.png",
+    "default-upside-down.png",
+    "error.png",
+    "fallback.png",
+    "minimum-hawkins.png",
+    "minimum-upside-down.png",
+    "signal-n.png"
+  ]
+}
